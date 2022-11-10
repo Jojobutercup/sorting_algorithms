@@ -1,49 +1,34 @@
-/*
- * File: 2-selection_sort.c
- * Auth: Sangwani P Zyambo
- */
 #include "sort.h"
 
 /**
- * selection_sort - Sorts an array of integers in ascedning order
- *  using the selection sort algorithm.
- *@array: The array to be sorted
- *@size: The size of the array
+ * selection_sort - sorts an array of integers in ascending order using the
+ * Selection sort algorithm
+ * @array: The array to sort
+ * @size: The size of the array
+ *
+ *
  */
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j, jmin, jtmp;
-	int itmp;
+	size_t i, j, min;
+	int swap;
 
-	/* loop through the entire array */
+	if (array == NULL || size < 2)
+		return;
+
 	for (i = 0; i < size - 1; i++)
 	{
-		/*
-		 * Find the smallest element in the unsorted array[i...size-1]
-		 * Assume the first element is the minimum
-		 */
-		jmin = i;
-		/* Compare against elements after i to find the smallest */
+		min = i;
 		for (j = i + 1; j < size; j++)
 		{
-
-			/* if this element is smaller, then it is the new smallest */
-			if (array[j] < array[jmin])
-			{
-				/* found the new smallest; remember the index */
-				jmin = j;
-			}
+			if (array[j] < array[min])
+				min = j;
 		}
-		/* swap */
-		if (jmin != i)
+		if (i != min)
 		{
-			itmp = array[i]; /*
-					  * Save the value at index i to be swapped
-					  * with the smallest element later
-					  */
-			jtmp = jmin; /* Save the samllest elements index before swapping */
-			array[i] = array[jmin];
-			array[jtmp] = itmp;
+			swap = array[i];
+			array[i] = array[min];
+			array[min] = swap;
 			print_array(array, size);
 		}
 	}
